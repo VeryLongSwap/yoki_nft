@@ -8,4 +8,4 @@ fs_permissions = [{ access = true, path = "./script/fs/"},{ access = "read", pat
 
 
 [rpc_endpoints]
-zkatana = "${MAINNET_RPC}"
+zkatana = "https://rpc.startale.com/zkatana"

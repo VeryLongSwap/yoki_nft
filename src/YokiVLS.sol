@@ -1,26 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.20;
 
-import "openzeppelin-contracts/utils/cryptography/MerkleProof.sol";
 import { ERC721AQueryable } from "ERC721A/extensions/ERC721AQueryable.sol";
 import "ERC721A/ERC721A.sol";
-import { IERC2981, ERC2981 } from "openzeppelin-contracts/token/common/ERC2981.sol";
+import { IERC2981, ERC2981 } from "openzeppelin/token/common/ERC2981.sol";
 import "./IERC4906.sol";
-import "openzeppelin-contracts/access/AccessControl.sol";
+import {AccessControl} from "openzeppelin/access/AccessControl.sol";
 
-enum TicketID {
-    FreeMintBlackHolderSale,
-    PrimeBlackHolderSale,
-    NormalBlackHolderSale,
-    YellowHolderSale,
-    AllowList
-}
-
-error PreMaxExceed(uint256 _presaleMax);
 error MaxSupplyOver();
 error NotEnoughFunds(uint256 balance);
 error NotMintable();
-error InvalidMerkleProof();
 error AlreadyClaimedMax();
 error MintAmountOver();
 
@@ -32,7 +21,7 @@ contract YokiVLS is ERC721A, IERC4906, ERC721AQueryable, AccessControl, ERC2981 
     bool public mintable = true;
 
     uint256 public publicCost = 0.002 ether;
-    string private baseURI = "https://arweave.net/5ITAVYFQeRMT53MvTAiicUobOc2xX-sSEA5PYOGgyQw/";
+    string private baseURI = "https://gateway.irys.xyz/Ni2eRGuXwx0I-m0nxHoaBO_LLDt5b39xeI9ngzaDiEg/";
 
     mapping(uint256 => string) private metadataURI;
 
