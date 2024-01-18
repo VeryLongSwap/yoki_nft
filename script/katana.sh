@@ -1,0 +1,1 @@
+forge create src/Yoki.sol:YokiVLS --rpc-url zkatana --private-key $PRIVATE_KEY 
