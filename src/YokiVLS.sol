@@ -56,17 +56,13 @@ contract YokiVLS is ERC721A, IERC4906, ERC721AQueryable, AccessControl, ERC2981 
         return 1;
     }
 
-    function mint(address _to, uint256 _mintAmount) external nonpayable whenMintable onlyRole(MINTER_ROLE) {
+    function mint(address _to, uint256 _mintAmount) external whenMintable onlyRole(MINTER_ROLE) {
         if (_totalMinted() + _mintAmount > maxSupply) revert MaxSupplyOver();
         _mint(_to, _mintAmount);
     }
 
     function ownerMint(address _address, uint256 count) external onlyRole(MINTER_ROLE) {
         _safeMint(_address, count);
-    }
-
-    function setPublicCost(uint256 _publicCost) external onlyRole(DEFAULT_ADMIN_ROLE) {
-        publicCost = _publicCost;
     }
 
     function setMintable(bool _state) external onlyRole(DEFAULT_ADMIN_ROLE) {
