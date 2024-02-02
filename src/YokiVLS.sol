@@ -17,11 +17,10 @@ contract YokiVLS is ERC721A, IERC4906, ERC721AQueryable, AccessControl, ERC2981 
     string private constant BASE_EXTENSION = ".json";
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
-    uint256 public immutable maxSupply = 10000;
+    uint256 public immutable maxSupply = 30000;
     bool public mintable = true;
 
-    uint256 public publicCost = 0.002 ether;
-    string private baseURI = "https://gateway.irys.xyz/Ni2eRGuXwx0I-m0nxHoaBO_LLDt5b39xeI9ngzaDiEg/";
+    string private baseURI = "https://gateway.irys.xyz/hvxDR2qlC27-iqN8wo9DaWA_PZ4tbjaZWXhTumE4pVk/";
 
     mapping(uint256 => string) private metadataURI;
 
@@ -57,10 +56,8 @@ contract YokiVLS is ERC721A, IERC4906, ERC721AQueryable, AccessControl, ERC2981 
         return 1;
     }
 
-    function mint(address _to, uint256 _mintAmount) external payable whenMintable onlyRole(MINTER_ROLE) {
+    function mint(address _to, uint256 _mintAmount) external nonpayable whenMintable onlyRole(MINTER_ROLE) {
         if (_totalMinted() + _mintAmount > maxSupply) revert MaxSupplyOver();
-        if (msg.value < publicCost * _mintAmount) revert NotEnoughFunds(msg.value);
-
         _mint(_to, _mintAmount);
     }
 
