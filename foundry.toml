@@ -9,3 +9,4 @@ fs_permissions = [{ access = true, path = "./script/fs/"},{ access = "read", pat
 
 [rpc_endpoints]
 zkatana = "https://rpc.startale.com/zkatana"
+zkevm = "https://rpc.startale.com/astar-zkevm"

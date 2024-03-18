@@ -6,6 +6,7 @@ import "ERC721A/ERC721A.sol";
 import { IERC2981, ERC2981 } from "openzeppelin/token/common/ERC2981.sol";
 import "./IERC4906.sol";
 import {AccessControl} from "openzeppelin/access/AccessControl.sol";
+import {Ownable} from "openzeppelin/access/Ownable.sol";
 
 error MaxSupplyOver();
 error NotEnoughFunds(uint256 balance);
@@ -13,7 +14,7 @@ error NotMintable();
 error AlreadyClaimedMax();
 error MintAmountOver();
 
-contract YokiVLS is ERC721A, IERC4906, ERC721AQueryable, AccessControl, ERC2981 {
+contract YokiVLS is ERC721A, IERC4906, ERC721AQueryable, AccessControl, ERC2981, Ownable {
     string private constant BASE_EXTENSION = ".json";
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
@@ -24,7 +25,7 @@ contract YokiVLS is ERC721A, IERC4906, ERC721AQueryable, AccessControl, ERC2981 
 
     mapping(uint256 => string) private metadataURI;
 
-    constructor() ERC721A("YokiVLS", "YokiVLS") {
+    constructor() ERC721A("YokiVLS", "YokiVLS") Ownable(_msgSender()) {
         _setDefaultRoyalty(_msgSender(), 1000);
         _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
     }

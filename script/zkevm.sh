@@ -1,0 +1,1 @@
+forge create src/YokiVLS.sol:YokiVLS --legacy --rpc-url zkevm --private-key $PRIVATE_KEY 
